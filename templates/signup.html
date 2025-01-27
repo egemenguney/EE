@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <form method="post">
+            Name: <input type="text" name="name" required><br>
+            <button type="submit">Sign Up</button>
+        </form>
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+        <a href="{{ url_for('index') }}">
+            <button>Go to Home</button>
+        </a>
+    </div>
+</body>
+</html>

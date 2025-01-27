@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monthly Competitions</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Monthly Competitions</h1>
+        <form method="post" action="{{ url_for('monthly_competitions') }}">
+            Team Name: <input type="text" name="team_name" required><br>
+            Task: <input type="text" name="task" required><br>
+            Completion Date: <input type="date" name="completion_date" required><br>
+            <button type="submit">Add Competition Result</button>
+        </form>
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+        <ul>
+            {% if monthly_competitions %}
+                {% for competition in monthly_competitions %}
+                    <li>ID: {{ competition[0] }} - Team: {{ competition[1] }} - Task: {{ competition[2] }} - Completion Date: {{ competition[3] }}</li>
+                {% endfor %}
+            {% else %}
+                <li>No monthly competitions yet.</li>
+            {% endif %}
+            <form method="post" action="{{ url_for('remove_monthly_competition') }}">
+                <label for="id">Competition ID to Remove:</label>
+                <input type="number" name="id" min="1" required><br>
+                <button type="submit">Delete Competition Record</button>
+            </form>
+        </ul>
+        <a href="{{ url_for('index') }}">
+            <button>Go to Home</button>
+        </a>
+    </div>
+</body>
+</html>
