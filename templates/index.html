@@ -8,21 +8,21 @@
     <div class="container">
         <h1>Raffle Application</h1>
         <div style="position: relative; text-align: center;">
-            <img src="{{ url_for('static', filename='Cofféé Macs.png') }}" alt="Cofféé Macs" style="max-width: 100%; height: auto;">
-            <div style="position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%);">
-                <a href="{{ url_for('signup') }}" style="display: inline-block; margin-right: 10px;">
+            <img src="{{ url_for('static', filename='Cofféé Macs.png') }}" alt="Cofféé Macs" class="raffle-image">
+            <div class="button-container">
+                <a href="{{ url_for('signup') }}">
                     <button>Sign Up</button>
                 </a>
-                <a href="{{ url_for('previousresults') }}" style="display: inline-block;">
+                <a href="{{ url_for('previousresults') }}">
                     <button>Past Results</button>
                 </a>
-                <a href="{{ url_for('monthly_competitions')}}" style="position: absolute; top: 95%; left: 50%; transform: translate(-50%, -50%);">
+                <a href="{{ url_for('monthly_competitions') }}">
                     <button>Monthly Competition</button>
                 </a>
             </div>
             {% if last_draw %}
-                <div class="highlighted-text" style="position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%);">
-                    <h2>Last Draw Result {{last_draw[2].split(' ')[0]}}</h2>
+                <div class="highlighted-text">
+                    <h2>Last Draw Result {{ last_draw[2].split(' ')[0] }}</h2>
                     <p>Winner: {{ last_draw[0] }} (Reference Number: {{ last_draw[1] }}), Date: {{ last_draw[2] }}</p>
                 </div>
             {% endif %}
