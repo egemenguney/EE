@@ -9,6 +9,20 @@ body {
     color: #e0e0e0; /* Light text color for contrast */
     margin: 0;
     padding: 0;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    position: relative; /* Added for background icon positioning */
+}
+
+body::before {
+    content: "\f179"; /* Unicode for the Apple icon in Font Awesome */
+    font-family: "Font Awesome 5 Brands"; /* Font Awesome Brand family for the Apple icon */
+    font-size: 1200px; /* Adjust size as needed */
+    color: rgba(255, 255, 255, 0.1); /* Light color with low opacity for subtle background */
+    position: fixed; /* Fixed positioning to stay in the center */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1; /* Ensure it stays in the background */
 }
 
 /* Centering the main heading */
@@ -20,46 +34,61 @@ h1 {
 
 /* Styling the form */
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: block;
+    text-align: left;
 }
 
 /* Input fields styling */
-input[type="text"], input[type="submit"] {
-    padding: 12px; /* Increased padding for a better touch target */
-    margin: 10px;
+input[type="text"], input[type="date"], input[type="number"], button, textarea {
+    padding: 10px; /* Decreased padding for a more compact look */
+    margin: 10px 0;
     border: 1px solid #444; /* Darker border for input fields */
     border-radius: 8px; /* Rounded corners for a softer look */
     background-color: #2a2a2a; /* Dark input background */
     color: #e0e0e0; /* Light text color */
+    width: auto; /* Input fields will adjust to their content */
+    max-width: 300px; /* Maximum width to keep fields shorter */
 }
 
 /* Container styling */
 .container {
-    width: 90%; /* Slightly wider for better responsiveness */
-    max-width: 1920px; /* Maximum width for larger screens */
+    width: 50%; /* Slightly wider for better responsiveness */
+    max-width: 1920px; /* Maximum width for a more compact container */
+    
     margin: 20px auto;
     background-color: #2a2a2a; /* Darker container */
     padding: 20px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Stronger shadow for depth */
     border-radius: 10px; /* Enhanced rounded corners */
+    text-align: left;
+    overflow: auto; /* Added for scrolling */
+}
+
+.subcontainer {
+    width: 90%; /* Slightly wider for better responsiveness */
+    max-width: 600px; /* Maximum width for a more compact container */
+    margin: 20px auto;
+    background-color: #2a2a2a; /* Darker container */
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Stronger shadow for depth */
+    border-radius: 10px; /* Enhanced rounded corners */
+    text-align: left;
 }
 
 /* Link styling */
 a {
     color: #78C5EF; /* Light blue color for links */
-    text-align: center;
+    text-align: left;
     display: block;
-    margin: 20px;
+    margin: 20px 0;
     text-decoration: none; /* Remove underline for a clean look */
 }
 
 /* Fancy button styling */
 button {
     position: relative;
-    padding: 12px 24px; /* Increased padding for better touch targets */
-    margin: 10px;
+    padding: 10px 20px; /* Decreased padding for a more compact look */
+    margin: 10px 0;
     border: none;
     border-radius: 8px; /* Rounded corners */
     background-color: #007aff; /* Apple blue color */
@@ -70,6 +99,7 @@ button {
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
+/* Highlighted text styling */
 .highlighted-text {
     background-color: rgba(0, 0, 0, 0.5); /* Yarı saydam koyu arka plan */
     color: white;
@@ -103,7 +133,6 @@ button:hover {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow on hover */
 }
 
-/* Button active state */
 button:active {
     background-color: #003d7a; /* Even darker for active state */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);

@@ -132,7 +132,10 @@ def draw():
             winner_info = "No one is eligible within the last 2 weeks"
     else:
         winner_info = "No participants"
-    return render_template('index.html', winner_info=winner_info, last_draw=(winner, winner_ref, draw_date) if 'winner' in locals() else None)
+
+    winners = get_previous_results()
+    competitions = get_monthly_competitions()
+    return render_template('admin.html', winner_info=winner_info, winners=winners, monthly_competitions=competitions)
 
 # Aylık görev sayfası
 @app.route('/monthly_competitions', methods=['GET', 'POST'])

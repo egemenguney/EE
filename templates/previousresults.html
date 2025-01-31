@@ -3,36 +3,36 @@
 <head>
     <title>Previous Results</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <div class="container">
+        <a href="{{ url_for('index') }}" class="home-icon" style="margin: 10px;"><i class="fas fa-home"></i></a>
         <h1>Previous Results</h1>
-        
-        <h2>Weekly Raffle Results</h2>
-        {% if draw_results %}
-            <ul>
-                {% for result in draw_results %}
-                    <li>{{ result[1] }} - Reference Number: {{ result[2] }} - Date: {{ result[3] }}</li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No raffle results yet.</p>
-        {% endif %}
-        
-        <h2>Monthly Team Competition Results</h2>
-        {% if monthly_results %}
-            <ul>
-                {% for competition in monthly_results %}
-                    <li>Team: {{ competition[1] }} - Task: {{ competition[2] }} - Completion Date: {{ competition[3] }}</li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No monthly competitions yet.</p>
-        {% endif %}
-        
-        <a href="{{ url_for('index') }}">
-            <button>Go to Home</button>
-        </a>
+        <div class="subcontainer">
+            <h2>Weekly Raffle Results</h2>
+            {% if draw_results %}
+                <ul>
+                    {% for result in draw_results %}
+                        <li>{{ result[1] }} - Reference Number: {{ result[2] }} - Date: {{ result[3] }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No raffle results yet.</p>
+            {% endif %}
+        </div>
+        <div class="subcontainer">
+            <h2>Monthly Team Competition Results</h2>
+            {% if monthly_results %}
+                <ul>
+                    {% for competition in monthly_results %}
+                        <li>Team: {{ competition[1] }} - Task: {{ competition[2] }} - Completion Date: {{ competition[3] }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No monthly competitions yet.</p>
+            {% endif %}
+        </div>
     </div>
 </body>
 </html>

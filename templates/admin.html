@@ -3,101 +3,68 @@
 <head>
     <title>Admin Page</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-    <style>
-        .hidden {
-            display: none;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-        }
-        form {
-            margin-bottom: 20px;
-        }
-        input[type="text"], input[type="date"], input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            background-color: #eee;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <div class="container">
+        <a href="{{ url_for('index') }}" class="home-icon"><i class="fas fa-home"></i></a>
         <h1>Admin Page</h1>
-        
-        <h2>Create New Raffle</h2>
-        <form method="post" action="{{ url_for('admin') }}">
-            Raffle Name: <input type="text" name="raffle_name" required><br>
-            Draw Date: <input type="date" name="draw_date" required><br>
-            <button type="submit">Create New Raffle</button>
-        </form>
-
+        <div class="subcontainer">
+            <h2>Create New Raffle</h2>
+            <form method="post" action="{{ url_for('admin') }}">
+                Raffle Name: <input type="text" name="raffle_name" required><br>
+                Draw Date: <input type="date" name="draw_date" required><br>
+                <button type="submit">Create New Raffle</button>
+            </form>
+        </div>
+        <div class="subcontainer">
+            <h2>Draw Raffle</h2>
+            <form method="post" action="{{ url_for('draw') }}">
+                <button type="submit">Draw Raffle</button>
+            </form>
+            {% if winner_info %}
+                <p>Winner: {{ winner_info }}</p>
+            {% endif %}
+        </div>
+        <div class="subcontainer">          
+            <h2>Raffle Winners</h2>
+            <ul>
+                {% if winners %}
+                    {% for winner in winners %}
+                        <li>ID: {{ winner[0] }} - {{ winner[1] }} - Reference Number: {{ winner[2] }} - Date: {{ winner[3] }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>No raffle winners yet.</li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="subcontainer">
+            <form method="post" action="{{ url_for('remove_winner_route') }}">
+                <label for="id">Winner ID to Remove:</label>
+                <input type="number" name="id" min="1" required><br>
+                <button type="submit">Remove Raffle Winner</button>
+            </form>
+        </div>
+        <div class="subcontainer">
+            <h2>Monthly Team Competitions</h2>
+            <ul>
+                {% if monthly_competitions %}
+                    {% for competition in monthly_competitions %}
+                        <li>ID: {{ competition[0] }} - Team: {{ competition[1] }} - Task: {{ competition[2] }} - Completion Date: {{ competition[3] }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>No monthly competitions yet.</li>
+                {% endif %}
+            </ul>
+            <form method="post" action="{{ url_for('remove_monthly_competition') }}">
+                <label for="id">Competition ID to Remove:</label>
+                <input type="number" name="id" min="1" required><br>
+                <button type="submit">Delete Competition Record</button>
+            </form>
+        </div>
         {% if message %}
             <p>{{ message }}</p>
         {% endif %}
-        
-        <h2>Raffle Winners</h2>
-        <ul>
-            {% if winners %}
-                {% for winner in winners %}
-                    <li>ID: {{ winner[0] }} - {{ winner[1] }} - Reference Number: {{ winner[2] }} - Date: {{ winner[3] }}</li>
-                {% endfor %}
-            {% else %}
-                <li>No raffle winners yet.</li>
-            {% endif %}
-        </ul>
-        <form method="post" action="{{ url_for('remove_winner_route') }}">
-            <label for="id">Winner ID to Remove:</label>
-            <input type="number" name="id" min="1" required><br>
-            <button type="submit">Remove Raffle Winner</button>
-        </form>
-
-        <h2>Monthly Team Competitions</h2>
-        <ul>
-            {% if monthly_competitions %}
-                {% for competition in monthly_competitions %}
-                    <li>ID: {{ competition[0] }} - Team: {{ competition[1] }} - Task: {{ competition[2] }} - Completion Date: {{ competition[3] }}</li>
-                {% endfor %}
-            {% else %}
-                <li>No monthly competitions yet.</li>
-            {% endif %}
-        </ul>
-        <form method="post" action="{{ url_for('remove_monthly_competition') }}">
-            <label for="id">Competition ID to Remove:</label>
-            <input type="number" name="id" min="1" required><br>
-            <button type="submit">Delete Competition Record</button>
-        </form>
-        
-        <a href="{{ url_for('index') }}">
-            <button>Go to Home</button>
-        </a>
     </div>
 </body>
 </html>

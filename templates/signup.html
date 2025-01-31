@@ -3,20 +3,27 @@
 <head>
     <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <div class="container">
+
+        <a href="{{ url_for('index') }}" class="home-icon"><i class="fas fa-home"></i></a>
         <h1>Sign Up</h1>
-        <form method="post">
-            Name: <input type="text" name="name" required><br>
-            <button type="submit">Sign Up</button>
-        </form>
+        <div class="subcontainer">
+            <form method="post" action="{{ url_for('signup') }}">
+                Name: <input type="text" name="name" required><br>
+                DSID: <input type="text" name="dsid" required><br>
+                Address: <textarea name="address" required></textarea><br>
+                Phone: <input type="text" name="phone" required><br>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>                
         {% if message %}
-            <p>{{ message }}</p>
+            <div class="label-container">
+                <p>{{ message }}</p>
+            </div>
         {% endif %}
-        <a href="{{ url_for('index') }}">
-            <button>Go to Home</button>
-        </a>
     </div>
 </body>
 </html>
